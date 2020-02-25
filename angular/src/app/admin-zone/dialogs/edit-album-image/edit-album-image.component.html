@@ -1,0 +1,41 @@
+<h2 mat-dialog-title >Editar Imagem do album {{data.albumName}}? </h2>
+<mat-spinner class="centrar-width-70" *ngIf="isLoading"  ></mat-spinner>
+<mat-dialog-content>
+    <div class="container">
+        <div class="row mt-2 mb-2 pt-2 pb-2 gradient-primary-light">
+            <div class="col-sm">
+                <input 
+                    class="form-control pr-3" 
+                    type="file" 
+                    name="file"
+                    (change)="handleNewAlbumPictureInput($event.target.files )"
+                    > 
+            </div>          
+            
+            <div class="col-sm d-flex align-items-center" >
+                Tipos Permitidos: jpeg, png 
+            </div>
+        </div>
+    </div>
+    
+</mat-dialog-content>
+<mat-dialog-content  *ngIf="!flagCorrectForm">
+    <div class="container">        
+        <p class="alert alert-danger text-center"> Erro: {{error}} </p>         
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="!isLoading" > 
+    <button                 
+        mat-raised-button 
+        class="action-button gradient-green"  
+        (click)="changeAlbumPicture(data.albumId)"
+        >Mudar
+    </button>
+    <button
+        mat-raised-button
+        color="primary"
+        (click)="exitEditAlbumImage()"
+        class="action-button"  
+        >Voltar            
+    </button>
+</mat-dialog-actions>   

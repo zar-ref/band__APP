@@ -1,0 +1,21 @@
+<h2 mat-dialog-title >Deseja apagar <span>{{data.name}}</span>  da Base de Dados</h2>
+<mat-spinner class="centrar-width-70" *ngIf="isLoading"  ></mat-spinner>
+<mat-dialog-content  *ngIf="!isLoading" >
+    Esta ação é Irreversível e perderá todos os dados deste utilizador!
+</mat-dialog-content> 
+<mat-dialog-actions *ngIf="!isLoading" > 
+    <button                 
+        mat-raised-button 
+        color="warn" 
+        class="action-button"  
+        (click)="deleteUser(data.email)"
+        >Apagar
+    </button>
+    <button
+        mat-raised-button
+        color="primary"
+        (click)="exitDeleteUserDialog()"
+        class="action-button"  
+        >Voltar            
+    </button>
+</mat-dialog-actions>   

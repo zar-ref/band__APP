@@ -1,0 +1,21 @@
+<h2 mat-dialog-title >Deseja apagar <span>{{data.musicToDelete}}</span>  do album {{data.albumName}}? </h2>
+<mat-spinner class="centrar-width-70" *ngIf="isLoading"  ></mat-spinner>
+<mat-dialog-content  *ngIf="!isLoading" >
+    Esta ação é Irreversível e a música será apagada!
+</mat-dialog-content> 
+<mat-dialog-actions *ngIf="!isLoading" > 
+    <button                 
+        mat-raised-button 
+        color="warn" 
+        class="action-button"  
+        (click)="deleteMusic(data.albumId, data.musicToDelete)"
+        >Apagar
+    </button>
+    <button
+        mat-raised-button
+        color="primary"
+        (click)="exitDeleteMusicDialog()"
+        class="action-button"  
+        >Voltar            
+    </button>
+</mat-dialog-actions>   

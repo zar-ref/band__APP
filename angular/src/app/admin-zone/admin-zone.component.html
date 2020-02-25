@@ -1,0 +1,290 @@
+
+
+
+<button mat-button color="primary" *ngIf="!isViewingAlbuns" (click)="showAlbuns()" class="span-95 button-color-1 mt-2 mb-2" >Ver albuns</button>
+<button mat-button color="primary" *ngIf="isViewingAlbuns" (click)="hideAlbuns()"  class="span-95 button-color-1 mt-2 mb-2" >Esconder albuns</button>
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col">
+            <button mat-button color="accent" class="upddate-users-button m-2 float-right" matTooltip="Atualizar" matTooltipPosition="left" *ngIf="isViewingAlbuns" (click)="updateAlbuns()"  >
+                <svg class="svg-icon" viewBox="0 0 20 20">
+                        <path fill="none" d="M19.305,9.61c-0.235-0.235-0.615-0.235-0.85,0l-1.339,1.339c0.045-0.311,0.073-0.626,0.073-0.949
+                            c0-3.812-3.09-6.901-6.901-6.901c-2.213,0-4.177,1.045-5.44,2.664l0.897,0.719c1.053-1.356,2.693-2.232,4.543-2.232
+                            c3.176,0,5.751,2.574,5.751,5.751c0,0.342-0.037,0.675-0.095,1l-1.746-1.39c-0.234-0.235-0.614-0.235-0.849,0
+                            c-0.235,0.235-0.235,0.615,0,0.85l2.823,2.25c0.122,0.121,0.282,0.177,0.441,0.172c0.159,0.005,0.32-0.051,0.44-0.172l2.25-2.25
+                            C19.539,10.225,19.539,9.845,19.305,9.61z M10.288,15.752c-3.177,0-5.751-2.575-5.751-5.752c0-0.276,0.025-0.547,0.062-0.813
+                            l1.203,1.203c0.235,0.234,0.615,0.234,0.85,0c0.234-0.235,0.234-0.615,0-0.85l-2.25-2.25C4.281,7.169,4.121,7.114,3.961,7.118
+                            C3.802,7.114,3.642,7.169,3.52,7.291l-2.824,2.25c-0.234,0.235-0.234,0.615,0,0.85c0.235,0.234,0.615,0.234,0.85,0l1.957-1.559
+                            C3.435,9.212,3.386,9.6,3.386,10c0,3.812,3.09,6.901,6.902,6.901c2.083,0,3.946-0.927,5.212-2.387l-0.898-0.719
+                            C13.547,14.992,12.008,15.752,10.288,15.752z">
+                        </path>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+<mat-spinner class="centrar-width-70" *ngIf="isGettingAlbumData"></mat-spinner>
+
+
+<div class="view-albuns span-95" *ngIf="isViewingAlbuns && !isGettingAlbumData" >
+    <ng-template ngFor let-album [ngForOf]="albunsData" let-index="index" let-isLast="last" >
+        <div class="container gradient-primary-lighter pb-2 pt-2 mb-4">
+            <div class="row">
+                <div class="col">
+                    <h2 class="album-title">{{album.name}}</h2>  
+                    
+                </div>                
+            </div>
+            <div class="row m-2">
+                <button mat-button    class="button-green col m-1" (click)="showEditAlbumImageDialog(album.albumId, album.imgUrl, album.name)">
+                    Mudar Capa de Album
+                </button>
+                <button mat-button    class="button-green col m-1" (click)="showEditAlbumDescriptionDialog(album.albumId, album.description , album.name)">
+                    Mudar Descrição do Album
+                </button>
+                <button mat-button    class="button-green col m-1" (click)="showEditAlbumNameDialog(album.albumId , album.name)">
+                    Mudar Nome do Album
+                </button>
+                <button mat-button    class="button-red col m-1" (click)="showDeleteAlbum(album.albumId , album.name)">
+                    Apagar  Album
+                </button>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="row">
+                        <img [src]="getLinks(album.albumId,album.imgUrl)" class="album-cover" [alt]="album.imgUrl">
+                    
+                    </div>
+                    
+                    
+                </div>
+                <div class="col ">
+                    <ng-template ngFor let-music [ngForOf]="album.musicsUrls" let-index="index-2" let-isLast="last-2" >
+                        <div class="row album-music mr-2" >
+                            <div class="col album-music__title">                                
+                                    {{music | fileTypeOut}}                               
+                            </div>         
+                            <div class="col album-music__download">
+                                <!-- <a [href]="getLinks(album.albumId,music)"  download>  -->
+                                    <button  class="album-music__download__button" (click)="getDownloadLink(album.albumId,music)">
+                                        Download
+                                    </button>
+                                <!-- </a> -->
+                            </div> 
+                            <div class="col album-music__delete">
+                                <button class="album-music__delete__button" (click)="showDeleteMusicDialog(album.albumId , music , album.name)" > 
+                                    Apagar
+                                </button>
+                            </div>
+                        </div>
+                    </ng-template>
+                    <div class="row mt-2 mb-1 mr-2 ">
+                        <button mat-button class=" button-blue span-100 pt-1 pb-1" (click)="showAddMusicToAlbumDialog(album.albumId, album.name , album.musicsUrls)">Adicionar Música</button>
+                    </div>
+               
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col">
+                    <h2 class="album-title">Descrição</h2>  
+                </div>
+                <div class="col">
+                   
+                </div>
+            </div>
+            <div class="row album-description m-2">
+                {{album.description}}
+               
+            </div>
+            
+        </div>
+    </ng-template>
+        
+</div>
+
+
+
+<div class="album-action-row">
+    <mat-action-row >
+        <button mat-button color="primary" class="span-95 button-color-1" *ngIf="!isCreatingAlbum" (click)="viewAlbumCreation()">Criar Album</button>
+        <button mat-button color="primary" class="span-95 button-color-1" *ngIf="isCreatingAlbum" (click)="hideAlbumCreation()">Esconder Criação de Album</button>
+    </mat-action-row>
+</div>
+
+<div class="create-album" *ngIf="isCreatingAlbum"     >
+    <mat-form-field class="action-button">       
+        <mat-label>Fazer Upload de Capa de Album?</mat-label>
+        <mat-select [(value)]="albumImageSelection" >
+            <mat-option value="Sim">Sim</mat-option>
+            <mat-option value="Não">Não</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <div class="action-button">
+        <input  
+            class="form-control gradient-primary-light" 
+            type="text" 
+            placeholder="Nome do Novo Album" 
+            [value]="newAlbumName" 
+            (input)="handleNewAlbumNameInput($event.target.value)"
+            name="albumName"
+                    
+            >
+    </div>
+    <div class="container">
+        <textarea class="form-control" rows="3" placeholder="Descrição do Novo Album" (input)="handleNewAlbumDescription($event.target.value)" ></textarea>
+    </div>
+
+    <div class="container" *ngIf="albumImageSelection === 'Sim'">
+        <div class="row gradient-primary-light mt-2 mb-2 pt-2 pb-2" >
+            <div class="col-sm">
+                <input 
+                    class="form-control" 
+                    type="file" 
+                    name="image" 
+                    (change)="handleNewAlbumPictureInput($event.target.files)"
+                 > 
+            </div>
+            <div class="col-sm d-flex align-items-center" >
+                Capa de Album 
+            </div>
+            <div class="col-sm d-flex align-items-center" >
+                Tipos Permitidos: jpeg, png
+            </div>
+            <div class="col-sm d-flex align-items-center" >
+                <button mat-button class="button-red" (click)="albumImageSelection = 'Não'" >
+                    Apagar
+                </button>
+            </div>
+        </div>
+    </div>
+
+   
+
+    <div class=" container">
+        <ng-template ngFor let-music [ngForOf]="albumForm.musics" let-index="index" let-isLast="last">
+            <div class="row mt-2 mb-2 pt-2 pb-2 gradient-primary-light">
+                <div class="col-sm">
+                    <input 
+                        class="form-control" 
+                        type="file" 
+                        name="file"
+                        (change)="handleNewAlbumMusicInput($event.target.files , index )" 
+                        > 
+                </div>
+                <div class="col-sm d-flex align-items-center">
+                        Música nº{{index+1}} - {{albumForm.musics[index]?.filename || "Escolher Música"}} 
+                </div>                
+                
+                <div class="col-sm d-flex align-items-center" >
+                    Tipos Permitidos: mp3
+                </div>
+                <div class="col-sm d-flex align-items-center">
+                    <button mat-button class="button-red" (click)="removeMusicFromNewAlbum(index)" >
+                        Apagar
+                    </button>
+                </div>
+              
+                
+
+            </div>
+        </ng-template>
+    </div>
+    <div class="container" *ngIf="!flagCorrectForm">
+        
+            <p class="alert alert-danger text-center">Formulario mal preenchido -->{{incorrectFormCause}} </p> 
+        
+    </div>
+     
+
+    <div class="container">
+        <div class="row mt-2 mb-2 ">
+            <button mat-button class=" button-blue span-100 pt-1 pb-1" (click)="addMusicToNewAlbum()">Adicionar Música</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <div class="row mt-2 mb-2">
+            <button mat-button class=" text-center gradient-green span-100 pt-2 pb-2" (click)="subimtNewAlbumForm()" >
+            Criar Novo Album!
+        </button>
+        </div>
+    </div>
+        
+
+
+</div>
+
+
+
+
+<mat-action-row >
+    <button mat-button color="primary" class="span-95 button-color-1 mb-4" *ngIf="!isViewingUsers" (click)="viewUsers()">Ver utilizadores</button>
+    <button mat-button color="primary"  class="span-95 button-color-1" *ngIf="isViewingUsers" (click)="hideUsers()">Esconder utilizadores</button>
+        
+</mat-action-row>
+<table mat-table [dataSource]="users" *ngIf="isViewingUsers" >
+
+    <!-- Colunas -->
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef> Email </th>
+        <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nome </th>
+        <td mat-cell *matCellDef="let user"> {{user.name}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="date">
+        <th mat-header-cell *matHeaderCellDef> Data de Registo </th>
+        <td mat-cell *matCellDef="let user"> {{user.date}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+        <th mat-header-cell *matHeaderCellDef> Tipo de Utilizador </th>
+        <td mat-cell *matCellDef="let user"> 
+            <button mat-button matTooltip="Editar" matTooltipPosition="left"  *ngIf="user.role == 'admin'" class="button-blue" (click)="showEditUserDialog(user.email, user.role)">
+                {{user.role}} 
+            </button>
+            <button mat-button matTooltip="Editar" matTooltipPosition="left"  *ngIf="user.role == 'active'" class="button-green" (click)="showEditUserDialog(user.email, user.role)">
+                {{user.role}} 
+            </button>
+            <button mat-button matTooltip="Editar" matTooltipPosition="left" *ngIf="user.role == 'inactive'" class="button-orange" (click)="showEditUserDialog(user.email, user.role)">
+                {{user.role}} 
+            </button>
+            
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> 
+            <button mat-button color="accent" class="upddate-users-button" matTooltip="Atualizar" matTooltipPosition="right" *ngIf="isViewingUsers" (click)="updateUsers()"  >
+                <svg class="svg-icon" viewBox="0 0 20 20">
+                        <path fill="none" d="M19.305,9.61c-0.235-0.235-0.615-0.235-0.85,0l-1.339,1.339c0.045-0.311,0.073-0.626,0.073-0.949
+                            c0-3.812-3.09-6.901-6.901-6.901c-2.213,0-4.177,1.045-5.44,2.664l0.897,0.719c1.053-1.356,2.693-2.232,4.543-2.232
+                            c3.176,0,5.751,2.574,5.751,5.751c0,0.342-0.037,0.675-0.095,1l-1.746-1.39c-0.234-0.235-0.614-0.235-0.849,0
+                            c-0.235,0.235-0.235,0.615,0,0.85l2.823,2.25c0.122,0.121,0.282,0.177,0.441,0.172c0.159,0.005,0.32-0.051,0.44-0.172l2.25-2.25
+                            C19.539,10.225,19.539,9.845,19.305,9.61z M10.288,15.752c-3.177,0-5.751-2.575-5.751-5.752c0-0.276,0.025-0.547,0.062-0.813
+                            l1.203,1.203c0.235,0.234,0.615,0.234,0.85,0c0.234-0.235,0.234-0.615,0-0.85l-2.25-2.25C4.281,7.169,4.121,7.114,3.961,7.118
+                            C3.802,7.114,3.642,7.169,3.52,7.291l-2.824,2.25c-0.234,0.235-0.234,0.615,0,0.85c0.235,0.234,0.615,0.234,0.85,0l1.957-1.559
+                            C3.435,9.212,3.386,9.6,3.386,10c0,3.812,3.09,6.901,6.902,6.901c2.083,0,3.946-0.927,5.212-2.387l-0.898-0.719
+                            C13.547,14.992,12.008,15.752,10.288,15.752z">
+                        </path>
+                </svg>
+            </button>
+        </th>
+        <td mat-cell *matCellDef="let user"> 
+            <button mat-button class="button-red" (click)="showDeleteUserDialog(user.email, user.name)">
+                Apagar 
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="usersColumnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let myRowData; columns: usersColumnsToDisplay"></tr>
+
+</table>

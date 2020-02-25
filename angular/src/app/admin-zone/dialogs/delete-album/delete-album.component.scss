@@ -1,0 +1,19 @@
+@import '~src/scss/styles.scss';
+
+.mat-dialog-title{
+    color:$color-orange;
+    text-align: center;
+    padding: .3rem;
+}
+
+span{
+    color:$color-primary;
+}
+
+
+mat-dialog-content{
+    color:$color-red;
+    padding:.8rem;
+    text-align: center;
+    
+}

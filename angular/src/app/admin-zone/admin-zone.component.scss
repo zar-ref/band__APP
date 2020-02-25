@@ -1,0 +1,191 @@
+@import '~src/scss/styles.scss';
+
+
+
+.upddate-users-button {
+    background-color: $color-secondary-lighter;
+    padding:0;
+    height: 2.5rem;
+}
+
+
+.svg-icon {
+    width: 3rem;
+    height: 2.5rem;
+  }
+.svg-icon:hover{
+    animation: rotate-update-icon 2s infinite linear;
+}
+
+
+
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+fill: $color-primary;
+}
+
+.svg-icon circle {
+stroke:  $color-primary;
+stroke-width: 1;
+}
+
+.button-white{
+    background-color: $color-grey-light-2;
+    color: $color-black;
+    padding:0;
+}
+
+
+
+.button-color-1{
+    background-color: $color-secondary-lighter;
+    height: 2.5rem;
+}
+
+.button-blue{
+    
+    background-color: $color-primary;
+    color: $color-white;
+    padding:0;
+
+    
+}
+
+.button-green{
+    background-color: $color-green;
+    color: $color-white;
+    padding:0;
+}
+
+.button-orange{
+    background-color: $color-orange;
+    color: $color-white;
+    padding:0;
+}
+
+
+.button-red{
+    background-color: $color-red;
+    color: $color-white;
+    padding:0;
+}
+
+table{
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+
+.mat-row{
+
+    height: auto;
+}
+.mat-header-cell{
+    padding: .8rem;
+}
+
+.mat-cell{
+    padding: .8rem;
+}
+
+.album-action-row{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.create-album{
+    margin-bottom: 2rem;
+}
+
+
+.gradient-primary-light {
+    background-image:  linear-gradient(
+        to right bottom,
+        rgba($color-primary-lighter, 0.8) ,
+        rgba($color-primary-lighter, 0.6));
+}
+
+.gradient-primary-lighter {
+    background-image:  linear-gradient(
+        to right bottom,
+        rgba($color-primary-lighter, 0.6) ,
+        rgba($color-primary-lighter, 0.2));
+}
+
+.gradient-green {
+    background-image:  linear-gradient(
+        to right bottom,
+        rgba($color-green, 0.8) ,
+        rgba($color-green, 0.6));
+}
+
+.gradient-green-lighter {
+
+    background-image:  linear-gradient(
+        to right bottom,
+        rgba($color-secondary-light, 0.8) ,
+        rgba($color-secondary-light, 0.6));
+}
+
+.album-title{
+    text-align: center;
+}
+
+.album-music{
+    height: 45px;
+    padding-top: 9px;
+    background-color: $color-grey-light-1;
+
+
+
+    &:hover{
+        background-color: $color-grey-light-2;
+    }
+
+    &__download{
+        height: 100%;
+        &__button{
+           
+            border-radius: 20px;
+
+            &:hover{
+                background-image:  linear-gradient(
+                    to right bottom,
+                    rgba($color-primary-lighter, 0.8) ,
+                    rgba($color-primary-lighter, 0.6));
+            }
+        }
+    }
+
+    &__delete{
+        height: 100%;
+        &__button{
+           
+            border-radius: 20px;
+
+            &:hover{
+                background-image:  linear-gradient(
+                    to right bottom,
+                    rgba($color-red, 0.8) ,
+                    rgba($color-red, 0.6));
+            }
+        }
+        
+    }
+
+}
+
+.album-cover{
+    
+    max-width: 300px;
+    max-height: 500px;
+    overflow: hidden;
+    object-fit: cover;
+}
+
+// .album-description{
+
+// }

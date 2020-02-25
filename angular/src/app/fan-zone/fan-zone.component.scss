@@ -1,0 +1,156 @@
+@import '~src/scss/styles.scss';
+
+
+.update-albuns-button {
+    background-color: $color-secondary-lighter;
+    padding:0;
+    height: 2.5rem;
+}
+
+
+.svg-icon {
+    width: 3rem;
+    height: 2.5rem;
+  }
+.svg-icon:hover{
+    animation: rotate-update-icon 2s infinite linear;
+}
+
+
+
+
+.svg-icon path,
+.svg-icon polygon,
+.svg-icon rect {
+fill: $color-primary;
+}
+
+.svg-icon circle {
+stroke:  $color-primary;
+stroke-width: 1;
+}
+
+
+
+.album{
+
+    width: 1200px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
+    &__nonAccessCard{
+        margin-bottom: 20px;
+        display: grid;
+        grid-gap: 10px;
+        grid-template-areas: "albumPicture albumName        albumDate        getAccess " 
+                             "albumPicture albumDescription albumDescription albumDescription"  ;
+
+        &__albumPicture{
+            grid-area: albumPicture;           
+            &__figure{
+                perspective: 1000px;
+                max-width: 350px;
+                max-height: 350px; 
+                transition: 1s;
+                
+                &__img{
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%; 
+                    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                    transform: scale(1); 
+                    transition: all .4s;
+
+                    &:hover{
+                        transform: scale(1.1); 
+                    }
+                }
+            }
+        }
+
+        &__albumName {
+            grid-area: albumName;
+            &__title{                
+                transform: scale(1); 
+                transition: all .4s;
+                &:hover{
+                    transform: scale(1.05); 
+                }
+            }
+        }
+
+        &__albumDate{
+            grid-area: albumDate;
+        }
+
+        &__albumDescription{
+            grid-area: albumDescription
+        }
+
+        &__albumGetAccess{
+            grid-area: getAccess;
+        }
+    }
+
+    &__accessCard{
+        margin-bottom: 20px;
+        display: grid;
+        grid-gap: 10px;
+        grid-column-gap: 50px;
+        grid-template-areas: "albumPicture     albumName" 
+                             "albumPicture     albumSongs"
+                             "albumDescription albumSongs"  
+                             "albumDescription albumSongs";
+
+        &__albumPicture{
+            grid-area: albumPicture;           
+            &__figure{
+                max-width: 350px;
+                max-height: 350px; 
+                transition: 1s;
+                
+                &__img{
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%; 
+                    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+                    transform: scale(1); 
+                    transition: all .4s;
+
+                    &:hover{
+                        transform: scale(1.1); 
+                    }
+                }
+            }
+        }
+
+        &__albumName {
+            width: 700px;
+            
+            grid-area: albumName;
+            &__title{                
+                transform: scale(1); 
+                transition: all .4s;
+                &:hover{
+                    transform: scale(1.05); 
+                }
+            }
+            &__date{
+                color: $color-grey-dark;
+                font-size: 8px;
+            }
+        }
+
+
+        &__albumDescription{
+            grid-area: albumDescription
+        }
+
+        &__albumSongs{
+            width: 700px;
+            // margin-left: 50px;
+            grid-area: albumSongs;
+            
+        }
+    }
+}

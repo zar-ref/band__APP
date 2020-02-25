@@ -1,0 +1,69 @@
+<mat-card   *ngIf="!flagSignUpSucceeded"  >
+    <form  (submit)="onSignUp(signUpForm)" #signUpForm="ngForm" >
+
+        <mat-form-field>
+            <input  
+                matInput type="text "
+                name="nome"
+                ngModel        
+                #nomeInput="ngModel"
+                placeholder="Nome Completo"
+                required 
+                >
+        </mat-form-field>
+
+        <mat-form-field>
+            <input  
+                matInput type="email" 
+                name="email"
+                ngModel        
+                #emailInput="ngModel"
+                placeholder="Email"
+                required 
+                >
+                <mat-error *ngIf="emailInput.invalid">{{ emailInput.errors.message | aspasOut }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input  
+                matInput type="email" 
+                name="emailConfirmation"
+                ngModel        
+                #emailInputConfirmation="ngModel"
+                placeholder="Confirmar Email"
+                required 
+                >
+                <mat-error *ngIf="emailInputConfirmation.invalid">{{ emailInputConfirmation.errors.message | aspasOut }}  </mat-error>
+        </mat-form-field>
+           
+
+        <mat-form-field>
+            <input type="password" matInput
+            name="password"
+            ngModel        
+            #passwordInput="ngModel"
+            required
+            placeholder="Password"
+            >
+        </mat-form-field>
+
+            
+
+
+        <button 
+            mat-raised-button 
+            color="accent" 
+            type="submit"
+            >
+            Inscrever
+        </button>
+            
+
+    </form>
+    
+</mat-card>
+
+<mat-card   *ngIf="flagSignUpSucceeded"  >
+    Autenticação ocorreu com sucesso! Por favor verificar o email e carregar no link enviado. O email poderá estar na parte de SPAM no seu correiro eletrónico
+
+</mat-card>

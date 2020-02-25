@@ -1,0 +1,67 @@
+.span-95{
+    width: 95%;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+    display: block;
+}
+
+.span-100{
+    width: 100%;
+    display: block;
+}
+
+.span-95-container{
+    width: 95%;
+    left: 2.5%;
+    right: 2.5%;
+    display: block;
+}
+
+
+.centrar-width-70{
+    
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+}
+
+.action-button {
+    display:inline-block;
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 40%
+}
+
+
+//////efeito de slide + fade-in from bottom
+
+@keyframes translacaoYCimaBaixoOpacity {
+
+    0% {
+        transform: translateY(40px);
+        opacity: 0;
+   }
+
+   50% {
+    transform: translateY(-20px);
+    opacity: 0.5;
+   }
+
+   75% {
+    transform: translateY(-10px);
+    opacity: 0.75;
+   }
+   100% {
+    transform: translateY(-10px);
+    opacity: 1;
+        
+   }
+}
+
+.slideUpDownOpacity {
+
+  
+    visibility: visible;
+    animation: translacaoYCimaBaixoOpacity 2s forwards;
+}

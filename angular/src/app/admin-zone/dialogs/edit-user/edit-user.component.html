@@ -1,0 +1,34 @@
+<h2 mat-dialog-title >Editar Tipo de Utilizador</h2>
+<mat-spinner class="centrar-width-70" *ngIf="isLoading"  ></mat-spinner>
+<mat-dialog-content  *ngIf="!isLoading" >
+   <form   #editUserForm="ngForm" (submit)="submitEditUserForm(editUserForm)"> 
+              
+        <mat-radio-group name="radio" [(ngModel)]="selectRadio" >
+         <mat-radio-button  value="inactive" name="inactive"  color="accent" >Inativo</mat-radio-button>
+         <mat-radio-button value="active" name="active"  color="accent" >Ativo</mat-radio-button>
+         <mat-radio-button value="admin" name="admin"  color="accent" >Administrador</mat-radio-button>
+        </mat-radio-group>
+
+        <button                 
+                mat-raised-button 
+                color="accent" 
+                type="submit"
+                class="action-button"  
+                >Editar
+        </button>
+        <button
+            mat-raised-button
+            color="primary"
+            (click)="exitEditUserDialog()"
+            class="action-button"  
+            >Voltar            
+        </button>
+
+
+
+        
+
+
+
+   </form>
+</mat-dialog-content>

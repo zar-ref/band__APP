@@ -1,0 +1,19 @@
+@import '~src/scss/styles.scss';
+
+
+
+.mat-dialog-title{
+    color:$color-primary;
+    text-align: center;
+}
+mat-dialog-content{
+    padding: .8rem;
+    overflow:hidden;
+    
+}
+
+mat-radio-button {
+    display: block;
+    padding: .8rem;
+}
+

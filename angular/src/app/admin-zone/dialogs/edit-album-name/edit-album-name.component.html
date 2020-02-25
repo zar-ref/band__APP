@@ -1,0 +1,22 @@
+<h2 mat-dialog-title >Editar nome do album {{data.albumName}}? </h2>
+<mat-dialog-content>
+    <div class="container">
+        <input type="text" class="form-control"  value="{{data.albumName}}" (input)="handleNewNameInput($event.target.value)" >
+    </div>
+    
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="!isLoading" > 
+    <button                 
+        mat-raised-button 
+        class="action-button gradient-green"  
+        (click)="changeAlbumName(data.albumId)"
+        >Mudar
+    </button>
+    <button
+        mat-raised-button
+        color="primary"
+        (click)="exitEditAlbumName()"
+        class="action-button"  
+        >Voltar            
+    </button>
+</mat-dialog-actions>   

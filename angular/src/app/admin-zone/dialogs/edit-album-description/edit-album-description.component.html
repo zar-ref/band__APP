@@ -1,0 +1,22 @@
+<h2 mat-dialog-title >Editar descrição do album {{data.albumName}}? </h2>
+<mat-dialog-content>
+    <div class="container">
+        <textarea class="form-control" rows="5" value="{{data.albumDescription}}" (input)="handleNewDescriptionInput($event.target.value)" ></textarea>
+    </div>
+    
+</mat-dialog-content>
+<mat-dialog-actions *ngIf="!isLoading" > 
+    <button                 
+        mat-raised-button 
+        class="action-button gradient-green"  
+        (click)="changeAlbumDescription(data.albumId)"
+        >Mudar
+    </button>
+    <button
+        mat-raised-button
+        color="primary"
+        (click)="exitEditAlbumDescription()"
+        class="action-button"  
+        >Voltar            
+    </button>
+</mat-dialog-actions>   

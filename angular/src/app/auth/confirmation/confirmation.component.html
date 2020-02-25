@@ -1,0 +1,17 @@
+<mat-card   *ngIf="isConfirming"  >
+
+
+    <p>A confirmar o email</p>
+
+</mat-card>
+
+<mat-card   *ngIf="!isConfirming && !errorConfirming"  >
+
+
+    <p>Email confirmado! Vamos redirecionar para a página de login em 3 segundos</p>
+
+</mat-card>
+
+<mat-card  *ngIf="errorConfirming"  > 
+    <p>Ocorreu um erro durante a confirmação. Por favor contactar o administrador!</p>
+</mat-card>

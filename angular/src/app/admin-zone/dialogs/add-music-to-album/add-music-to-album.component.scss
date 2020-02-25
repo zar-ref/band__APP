@@ -1,0 +1,26 @@
+@import '~src/scss/styles.scss';
+
+.mat-dialog-title{
+    color:$color-orange;
+    text-align: center;
+    padding: .3rem;
+}
+
+span{
+    color:$color-primary;
+}
+
+
+mat-dialog-content{
+    color:$color-red;
+    padding:.8rem;
+    text-align: center;
+    
+}
+
+.gradient-green {
+    background-image:  linear-gradient(
+        to right bottom,
+        rgba($color-green, 0.8) ,
+        rgba($color-green, 0.6));
+}
